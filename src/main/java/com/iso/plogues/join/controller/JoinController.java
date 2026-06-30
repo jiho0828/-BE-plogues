@@ -23,9 +23,20 @@ public class JoinController {
 	private final JoinService joinService;
 	
 	@PostMapping
-	public ResponseEntity<ApiResponse<?>> saveJoin(@AuthenticationPrincipal CustomUserDetails user, JoinDto join, @RequestParam(name="file") MultipartFile file) {
+	public ResponseEntity<ApiResponse<Void>> saveJoin(@AuthenticationPrincipal CustomUserDetails user, JoinDto join, @RequestParam(name="file", required=false) MultipartFile file) {
 		joinService.saveJoin(user, join, file);
 		return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created("게시글 작성 성공", null));
+	}
+	
+	@GetMapping
+	public ResponseEntity<ApiResponse<BoardResponse<JoinDto>>> findAll(@RequestParam(name="page", defaultValue = "1") int page, @RequestParam(name="category") String category) {
+		BoardResponse<JoinDto> br = null;
+		if("plant".equals(category)) {
+			br = joinService.findAllPlant(page);
+		} else if("plogging".equals(category)) {
+			br = joinService.findAllPlog(page);
+		}
+		return ResponseEntity.status(200).body(ApiResponse.created("게시글 전체 조회 성공", br));
 	}
 
 }
