@@ -1,8 +1,8 @@
 spring:
   application:
-    name: unknown
+    name: plogues
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:XE
+    url: jdbc:oracle:thin:@192.168.51.34:1521:XE
     username: C##KH_ISO
     password: 1234
     driver-class-name: oracle.jdbc.driver.OracleDriver
