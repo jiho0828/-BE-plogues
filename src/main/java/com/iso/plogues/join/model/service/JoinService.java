@@ -1,5 +1,7 @@
 package com.iso.plogues.join.model.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +12,8 @@ import com.iso.plogues.join.file.model.service.JoinFileService;
 import com.iso.plogues.join.model.dao.JoinMapper;
 import com.iso.plogues.join.model.dto.JoinDto;
 import com.iso.plogues.join.model.vo.Join;
+import com.iso.plogues.template.board.BoardResponse;
+import com.iso.plogues.template.page.PageInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,10 +39,34 @@ public class JoinService {
 		if(result != 1) {
 			throw new FailedInsertException("게시글 작성 실패");
 		}
-		if(file == null || file.getOriginalFilename() == "") {
+		if(file == null || file.isEmpty()) {
 			return;
 		}
 		fileService.saveFile(file, joinEntity.getJoinNo(), "join");
+	}
+	
+	private PageInfo newPageInfo(int listCount, int page) {
+		return PageInfo.of(listCount, page, 10, 5);
+	}
+	
+	@Transactional
+	public BoardResponse<JoinDto> findAllPlant(int page) {
+		PageInfo pageInfo = newPageInfo(joinMapper.listCount(), page);
+		List<JoinDto> list = joinMapper.findAllPlant(pageInfo);
+		BoardResponse<JoinDto> br = new BoardResponse();
+		br.setPage(pageInfo);
+		br.setBoard(list);
+		return br;
+	}
+	
+	@Transactional
+	public BoardResponse<JoinDto> findAllPlog(int page) {
+		PageInfo pageInfo = newPageInfo(joinMapper.listCount(), page);
+		List<JoinDto> list = joinMapper.findAllPlog(newPageInfo(joinMapper.listCount(), page));
+		BoardResponse<JoinDto> br = new BoardResponse();
+		br.setPage(pageInfo);
+		br.setBoard(list);
+		return br;
 	}
 
 }
