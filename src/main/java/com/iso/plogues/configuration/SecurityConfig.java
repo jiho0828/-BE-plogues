@@ -38,10 +38,12 @@ public class SecurityConfig {
 				   .cors(Customizer.withDefaults())
 				   .authorizeHttpRequests(requests -> { 
 					   requests.requestMatchers(HttpMethod.POST, "/api/auth/logout").authenticated();
-					   requests.requestMatchers(HttpMethod.POST).permitAll();
+					   requests.requestMatchers(HttpMethod.POST, "/api/question", "/api/auth/login").permitAll();
 					   requests.requestMatchers(HttpMethod.PATCH).permitAll();
 					   requests.requestMatchers(HttpMethod.DELETE).permitAll();
 					   requests.requestMatchers(HttpMethod.GET).permitAll();
+					   requests.requestMatchers("/api/admin").hasRole("ADMIN");
+		            	  requests.requestMatchers("/api/admin").hasAnyRole("ADMIN", "USER");
 				   }).sessionManagement(manager -> 
 				   						manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				   .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
