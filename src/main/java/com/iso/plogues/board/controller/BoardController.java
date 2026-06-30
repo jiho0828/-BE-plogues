@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iso.plogues.api.model.vo.ApiResponse;
 import com.iso.plogues.board.model.dto.BoardDto;
 import com.iso.plogues.board.model.service.BoardService;
-import com.iso.plogues.template.board.BoardResponse;
+
+import com.iso.plogues.util.dto.BoardResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,5 +30,4 @@ public class BoardController {
                 .data(boardService.selectBoardList(page))
                 .build();
     }
-
 }
