@@ -40,7 +40,7 @@ public class UserController {
 		return ResponseEntity.ok().body(ApiResponse.success("회원정보 조회 성공", userService.selectMyInfo(user)));
 	}
 	
-	@GetMapping
+	@GetMapping("/requests")
 	public ResponseEntity<ApiResponse<MyPageResponse>> findAllRequest(@AuthenticationPrincipal CustomUserDetails user, @RequestParam(value="page", defaultValue="1")int page, @RequestParam(value="status", defaultValue="all")String status) {
 		return ResponseEntity.ok().body(ApiResponse.success("참여 요청 목록 조회 성공", userService.findAllRequest(user,page,status)));
 	}
