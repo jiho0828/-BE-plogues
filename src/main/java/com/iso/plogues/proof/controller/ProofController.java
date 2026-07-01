@@ -19,6 +19,7 @@ import com.iso.plogues.board.model.dto.BoardDto;
 import com.iso.plogues.board.model.service.BoardService;
 import com.iso.plogues.proof.model.dto.ProofDto;
 import com.iso.plogues.proof.model.service.ProofService;
+import com.iso.plogues.util.dto.BoardResponse;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,15 @@ public class ProofController {
 	return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created(null));
 	}
 
-	
+	@GetMapping("/detail")
+	public ResponseEntity<ApiResponse<BoardResponse<ProofDto>>> findByProofNo(
+	        @RequestParam(name="proofNo") Long proofNo) {
+
+	    BoardResponse<ProofDto> br = proofService.findByProofNo(proofNo);
+
+	    return ResponseEntity.status(200)
+	            .body(ApiResponse.success("인증 게시글 상세 조회 성공", br));
+	}
 	
 	
 	

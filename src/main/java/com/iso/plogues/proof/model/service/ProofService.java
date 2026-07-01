@@ -7,11 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iso.plogues.auth.model.vo.CustomUserDetails;
+import com.iso.plogues.exception.FailedInsertException;
 import com.iso.plogues.exception.FileUploadException;
 import com.iso.plogues.proof.file.model.service.ProofFileService;
 import com.iso.plogues.proof.model.dao.ProofMapper;
 import com.iso.plogues.proof.model.dto.ProofDto;
 import com.iso.plogues.proof.model.vo.Proof;
+import com.iso.plogues.util.dto.BoardResponse;
+import com.iso.plogues.util.file.FileDto;
+import com.iso.plogues.util.page.PageInfo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +49,21 @@ public class ProofService {
 		// 사진 2개 각각 저장
 		proofFileService.saveProofFiles(files, p.getProofNo());
 
+	}
+
+	@Transactional
+	public BoardResponse<ProofDto> findByProofNo(Long proofNo) {
+
+		ProofDto proof = proofMapper.findByProofNo(proofNo);
+
+		List<FileDto> fileList = proofFileService.findByBno(proofNo);
+
+		proof.setFiles(fileList);
+
+		BoardResponse<ProofDto> br = new BoardResponse<>();
+		br.setBoard(List.of(proof));
+
+		return br;
 	}
 
 }
