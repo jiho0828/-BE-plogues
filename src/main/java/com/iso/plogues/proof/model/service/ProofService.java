@@ -16,45 +16,35 @@ import com.iso.plogues.proof.model.vo.Proof;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProofService {
-	
+
 	private final ProofMapper proofMapper;
 	private final ProofFileService proofFileService;
-	
-	
+
 	@Transactional
-    public void save(ProofDto proof, List<MultipartFile> files, CustomUserDetails user) {
-        
-       
-		Proof p = Proof.builder()
-		        .title(proof.getTitle())
-		        .content(proof.getContent())
-		        .userId(user.getUsername())
-		        .category(proof.getCategory())
-		        .joinNo(proof.getJoinNo())
-		        .quantity(proof.getQuantity()) 
-		        .build();
+	public void save(ProofDto proof, List<MultipartFile> files, CustomUserDetails user) {
 
-        // 2. 인증 게시글 저장                  
-        int result = proofMapper.save(p);
-       
-        
-        if (result == 0) {
-            throw new FileUploadException("게시글 작성에 실패하였습니다. 잠시 후에 다시 시도해주세요.");
-        }	
-       
-        if (files != null && !files.isEmpty()) {
-            proofFileService.saveProofFiles(files, p.getProofNo());
-        }
-    }
-	
+		// 사진 2장 필수
+		if (files == null || files.size() != 2) {
+			throw new FileUploadException("인증 사진은 2장을 등록해야 합니다.");
+		}
 
+		Proof p = Proof.builder().title(proof.getTitle()).content(proof.getContent()).userId(user.getUsername())
+				.category(proof.getCategory()).joinNo(proof.getJoinNo()).quantity(proof.getQuantity()).build();
 
-	
-	
-	
+		// 게시글 저장
+		int result = proofMapper.save(p);
+
+		if (result == 0) {
+			throw new FileUploadException("게시글 작성에 실패하였습니다.");
+		}
+
+		// 사진 2개 각각 저장
+		proofFileService.saveProofFiles(files, p.getProofNo());
+
+	}
+
 }

@@ -49,16 +49,7 @@ public class ProofController {
 	return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created(null));
 	}
 
-	// 목록조회
-	@GetMapping	
-	public ResponseEntity<ApiResponse<List<ProofDto>>> findAll(
-	        @RequestParam(name="page", defaultValue="1") int page) {
-
-	    List<ProofDto> proofs = proofService.findAll(page);
-
-	    return ResponseEntity.ok()
-	            .body(ApiResponse.success(proofs));
-	}
+	
 	
 	
 	
