@@ -1,6 +1,8 @@
 package com.iso.plogues.board.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import com.iso.plogues.api.model.vo.ApiResponse;
 import com.iso.plogues.board.model.dto.BoardDto;
 import com.iso.plogues.board.model.service.BoardService;
-
 import com.iso.plogues.util.dto.BoardResponse;
 
 import lombok.RequiredArgsConstructor;
