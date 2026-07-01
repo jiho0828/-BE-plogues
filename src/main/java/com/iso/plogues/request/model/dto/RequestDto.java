@@ -16,7 +16,7 @@ public class RequestDto {
 	private Long joinRequestNo;
 	private Long joinNo;
 	private String userId;
-	@NotBlank(message="포부를 작성해주세요.")
+	@NotBlank(max=200 ,message="포부를 작성해주세요.")
 	private String aspiration;
 	private String status;
 }
