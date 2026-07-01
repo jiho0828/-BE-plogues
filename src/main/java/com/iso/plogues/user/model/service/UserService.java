@@ -18,6 +18,7 @@ import com.iso.plogues.user.file.FileMapper;
 import com.iso.plogues.user.model.dao.UserMapper;
 import com.iso.plogues.user.model.dto.MyInfoDto;
 import com.iso.plogues.user.model.dto.UserDto;
+import com.iso.plogues.user.model.vo.MyPageResponse;
 import com.iso.plogues.user.model.vo.User;
 import com.iso.plogues.util.file.File;
 import com.iso.plogues.util.file.FileService;
@@ -107,6 +108,12 @@ public class UserService {
 		if(!passwordEncoder.matches(userPwd, user.getPassword())) {
 			throw new InvalidUserPwdException("비밀번호가 틀렸습니다.");
 		}
+	}
+
+
+	public MyPageResponse findAllRequest(CustomUserDetails user, int page, String status) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
