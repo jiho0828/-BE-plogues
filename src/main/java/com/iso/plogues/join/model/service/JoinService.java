@@ -87,9 +87,7 @@ public class JoinService {
 	public BoardResponse<JoinDto> findAllPlog(int page) {
 		PageInfo pageInfo = newPageInfo(joinMapper.listCount(), page);
 		List<JoinDto> list = joinMapper.findAllPlog(newPageInfo(joinMapper.listCount(), page));
-		BoardResponse<JoinDto> br = new BoardResponse<JoinDto>();
-		br.setPage(pageInfo);
-		br.setBoard(list);
+		BoardResponse<JoinDto> br = new BoardResponse<JoinDto>(br.setPage(pageInfo),br.setBoard(list));
 		return br;
 	}
 	
