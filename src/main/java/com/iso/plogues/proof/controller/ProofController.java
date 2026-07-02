@@ -54,4 +54,13 @@ public class ProofController {
 		return ResponseEntity.status(200).body(ApiResponse.success("인증 게시글 상세 조회 성공", proof));
 	}
 
+	@GetMapping("/{proofNo}")
+	public ResponseEntity<ApiResponse<BoardResponse<ProofDto>>> findAll(
+			@RequestParam(name = "page", defaultValue = "1") int page) {
+
+		BoardResponse<ProofDto> br = proofService.findAll(page);
+
+		return ResponseEntity.status(200).body(ApiResponse.success("인증 게시글 전체 조회 성공", br));
+	}
+
 }
