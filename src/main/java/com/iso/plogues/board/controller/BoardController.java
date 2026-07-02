@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +52,15 @@ public class BoardController {
         boardDto.setUserId(userDetails.getUsername());
         boardService.insertBoard(boardDto, files);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created("게시글 작성 성공", null));
+    }
+    
+    @PatchMapping("/{boardNo}")
+    public ResponseEntity<ApiResponse<Void>> updateBoard(
+            @AuthenticationPrincipal CustomUserDetails user,
+            @PathVariable(name = "boardNo") Long boardNo,
+            BoardDto boardDto,
+            @RequestParam(name = "files", required = false) List<MultipartFile> files) {
+        boardService.updateBoard(user, boardNo, boardDto, files);
+        return ResponseEntity.ok(ApiResponse.success("게시글 수정 성공", null));
     }
 }

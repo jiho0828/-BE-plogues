@@ -22,6 +22,8 @@ public interface BoardMapper {
 	void insertBoard(BoardDto boardDto);
 	void insertFile(File file);
 	
+	int updateBoard(BoardDto boardDto);
+	
 }
 
 
