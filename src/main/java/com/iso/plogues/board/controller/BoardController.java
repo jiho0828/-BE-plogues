@@ -2,6 +2,7 @@ package com.iso.plogues.board.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,43 +34,22 @@ public class BoardController {
     public ResponseEntity<ApiResponse<BoardResponse<BoardDto>>> selectBoardList(
             @RequestParam(name = "category") String category,
             @RequestParam(name = "page", defaultValue = "1") int page) {
-
-        return ResponseEntity.ok(
-                ApiResponse.<BoardResponse<BoardDto>>builder()
-                        .code(200)
-                        .message("게시글 목록 조회 성공 !")
-                        .data(boardService.selectBoardList(page))
-                        .build()
-        );
+        return ResponseEntity.ok(ApiResponse.success("게시글 목록 조회 성공", boardService.selectBoardList(page)));
     }
-    
+
     @GetMapping("/{boardNo}")
     public ResponseEntity<ApiResponse<BoardDto>> selectBoardDetail(
             @PathVariable("boardNo") Long boardNo) {
-    	
-        return ResponseEntity.ok(
-                ApiResponse.<BoardDto>builder()
-                        .code(200)
-                        .message("게시글 상세 조회 성공 !")
-                        .data(boardService.selectBoardDetail(boardNo))
-                        .build()
-        );
+        return ResponseEntity.ok(ApiResponse.success("게시글 상세 조회 성공", boardService.selectBoardDetail(boardNo)));
     }
-    
+
     @PostMapping
     public ResponseEntity<ApiResponse<Void>> insertBoard(
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @Valid BoardDto boardDto,
-            @RequestParam(value = "files", required = false) List<MultipartFile> files) {
-        
-        boardDto.setUserId(userDetails.getUsername()); 
+            @RequestParam(name = "files", required = false) List<MultipartFile> files) {
+        boardDto.setUserId(userDetails.getUsername());
         boardService.insertBoard(boardDto, files);
-        
-        return ResponseEntity.ok(
-                ApiResponse.<Void>builder()
-                        .code(200)
-                        .message("게시글 작성 성공")
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created("게시글 작성 성공", null));
     }
 }

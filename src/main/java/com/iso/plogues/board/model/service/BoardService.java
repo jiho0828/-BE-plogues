@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iso.plogues.board.model.dao.BoardMapper;
 import com.iso.plogues.board.model.dto.BoardDto;
+import com.iso.plogues.exception.FailedFindByNoException;
 import com.iso.plogues.util.dto.BoardResponse;
 import com.iso.plogues.util.file.File;
 import com.iso.plogues.util.file.FileDto;
@@ -45,7 +46,7 @@ public class BoardService {
 
     public BoardDto selectBoardDetail(Long boardNo) {
         BoardDto board = boardMapper.selectBoardDetail(boardNo);
-        if (board == null) throw new RuntimeException("존재하지 않는 게시글입니다.");
+        if (board == null) throw new FailedFindByNoException("존재하지 않는 게시글입니다.");
 
         List<FileDto> files = boardMapper.selectFileList(boardNo);
         board.setFileList(files);
