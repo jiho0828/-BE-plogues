@@ -31,6 +31,47 @@
   	       JOIN_REQUEST_NO = #{requestNo}
   </select>
   
+  <select id="countByUserIdStatus" resultType="_int">
+  	SELECT
+  	       COUNT(*)
+  	  FROM
+  	       JOIN_REQUEST
+  	 WHERE
+  	       USER_ID = #{userId}
+  	<if test="status != null and status != 'all'">
+  	   AND
+  	       STATUS = #{status}
+  	</if>
+  </select>
+  
+  <select id="findAll" resultType="RequestDto">
+  	SELECT
+  	       JOIN_REQUEST_NO
+  	     , ASPIRATION
+  	     , JR.STATUS
+  	     , JR.JOIN_NO
+  	     , JR.USER_ID
+  	     , JB.USER_ID AS host
+  	  FROM
+  	       JOIN_REQUEST JR
+  	  JOIN
+  	       JOIN_BOARD JB ON(JB.JOIN_NO = JR.JOIN_NO)
+  	 WHERE
+  	       JB.USER_ID = #{userId}
+  	<if test="status != null and status != 'all'">
+  	   AND
+  	       JR.STATUS = #{status}
+  	</if>
+  	 ORDER
+  	    BY
+  	       JOIN_REQUEST_NO DESC
+  	OFFSET
+  	       #{offset} ROWS
+	 FETCH
+	  NEXT
+	       #{boardLimit} ROWS ONLY
+  </select>
+  
   
   
   <insert id="requestJoin">
@@ -64,6 +105,8 @@
 	 WHERE
   	       JOIN_REQUEST_NO = #{requestNo}    
   </update>
+  
+ 
   
   
   
