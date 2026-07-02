@@ -34,7 +34,7 @@
     </select>
     
     <select id="selectMyBoardList"
-            resultType="com.iso.plogues.board.model.dto.BoardDto">
+            resultType="BoardDto">
 
         SELECT
     			RB.BOARD_NO AS boardNo,
