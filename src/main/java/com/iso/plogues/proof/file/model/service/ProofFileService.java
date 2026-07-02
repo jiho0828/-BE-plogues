@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iso.plogues.exception.FailedDeleteException;
 import com.iso.plogues.exception.FailedInsertException;
 import com.iso.plogues.proof.file.model.dao.ProofFileMapper;
 import com.iso.plogues.util.file.File;
@@ -45,5 +46,26 @@ public class ProofFileService {
 		return proofFileMapper.findByBno(proofNo);
 	}
 
+	@Transactional
+	public void deleteFile(Long proofNo) {
 
+		int result = proofFileMapper.deleteFile(proofNo);
+
+		if (result < 1) {
+			throw new FailedDeleteException("파일 삭제에 실패했습니다.");
+		}
+	}
+
+	@Transactional
+	public void updateFile(List<MultipartFile> files, Long proofNo) {
+
+		deleteFile(proofNo);
+
+		saveProofFiles(files, proofNo);
+
+	}
+	
+	
+	
+	
 }
