@@ -15,6 +15,17 @@
 	       USER_ID = #{userId}
   </select>
   
+  <select id="countAcceptRequestNo" resultType="_int">
+  	SELECT
+  	       COUNT(*)
+  	  FROM
+  	       JOIN_REQUEST
+  	 WHERE
+  	       JOIN_NO = #{joinNo}
+  	   AND
+  	       STATUS = 'ACCEPTED'
+  </select>
+  
   <select id="findByRequestNo" resultType="RequestDto">
   	SELECT
   	       JOIN_REQUEST_NO
