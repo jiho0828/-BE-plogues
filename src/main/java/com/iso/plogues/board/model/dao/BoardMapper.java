@@ -14,14 +14,13 @@ import com.iso.plogues.util.page.PageInfo;
 public interface BoardMapper {
 
     int countBoardList();
+    int countMyBoardList(String userId);
+    List<BoardDto> selectMyBoardList(@Param(value="userId")String userId, @Param(value="pi")PageInfo pi);
     List<BoardDto> selectBoardList(PageInfo pi);
-    
     BoardDto selectBoardDetail(Long boardNo);
 	List<FileDto> selectFileList(Long boardNo);
-	
 	void insertBoard(BoardDto boardDto);
 	void insertFile(File file);
-	
 	int updateBoard(BoardDto boardDto);
 	
 	int deleteBoard(@Param(value="userId") String userId, @Param(value="boardNo") Long boardNo);
