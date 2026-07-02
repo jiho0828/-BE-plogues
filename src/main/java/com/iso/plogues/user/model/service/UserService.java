@@ -130,6 +130,12 @@ public class UserService {
 	}
 
 
+	public MyPageResponse findAllRequest(CustomUserDetails user, int page, String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 

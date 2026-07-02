@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-
 import com.iso.plogues.board.model.dto.BoardDto;
 import com.iso.plogues.util.file.File;
 import com.iso.plogues.util.file.FileDto;
@@ -23,6 +22,8 @@ public interface BoardMapper {
 	void insertBoard(BoardDto boardDto);
 	void insertFile(File file);
 	int updateBoard(BoardDto boardDto);
+	
+	int deleteBoard(@Param(value="userId") String userId, @Param(value="boardNo") Long boardNo);
 	
 }
 
