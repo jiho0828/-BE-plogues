@@ -3,15 +3,10 @@
 
 <mapper namespace="com.iso.plogues.report.model.dao.ReportMapper">
 	<insert id="saveReport">
-		<selectKey keyProperty="reportNo"
-				   resultType="long"
-				   order="BEFORE">
-			SELECT SEQ_PLG_RB.NEXTVAL
-			FROM DUAL
-		</selectKey>
 		INSERT INTO REPORT_BOARD
 		VALUES
 			   (
+				  SEQ_PLG_RB.NEXTVAL
 				  #{reportNo}
 			    , #{userId}
 			    , #{reportCategory}
