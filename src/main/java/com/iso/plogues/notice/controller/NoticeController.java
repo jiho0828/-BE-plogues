@@ -3,6 +3,7 @@ package com.iso.plogues.notice.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class NoticeController {
 	}
 	
 	@PatchMapping("/{noticeNo}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ApiResponse<Void>> updateNotice(
 	        @AuthenticationPrincipal CustomUserDetails userDetails,
 	        @PathVariable(name = "noticeNo") Long noticeNo,
@@ -54,6 +56,7 @@ public class NoticeController {
 	}
 
 	@DeleteMapping("/{noticeNo}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ApiResponse<Void>> deleteNotice(
 	        @AuthenticationPrincipal CustomUserDetails user,
 	        @PathVariable(name = "noticeNo") Long noticeNo) {
@@ -62,6 +65,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ApiResponse<Void>> insertNotice(
 	        @AuthenticationPrincipal CustomUserDetails user,
 	        @Valid NoticeDto noticeDto,
