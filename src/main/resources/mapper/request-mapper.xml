@@ -44,7 +44,7 @@
   
       <select id="countByHostStatus" resultType="_int">
   	SELECT
-  	       count(*)
+  	       COUNT(*)
   	  FROM
   	       JOIN_REQUEST JR
   	  JOIN
@@ -91,7 +91,7 @@
   
     <select id="countMyJoins" resultType="_int">
   	SELECT
-  	       count(*)
+  	       COUNT(*)
   	  FROM
   	       JOIN_REQUEST JR
   	  JOIN
