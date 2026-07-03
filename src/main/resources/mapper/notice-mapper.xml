@@ -85,5 +85,27 @@
 		AND
 				DELETED = 'N'
 	</select>
+	
+	<update id="updateNotice">
+    	UPDATE 
+    			NOTICE_BOARD
+    	SET
+        		TITLE = #{notice.title},
+        		CONTENT = #{notice.content},
+        		UPDATED = 'Y'
+    	WHERE
+        		NOTICE_NO = #{notice.noticeNo}
+        AND 
+        		DELETED = 'N'
+</update>
+
+	<update id="deleteNotice">
+    	UPDATE 
+    			NOTICE_BOARD
+    	SET 
+    			DELETED = 'Y'
+   		WHERE
+        		NOTICE_NO = #{noticeNo}
+</update>
 
 </mapper>

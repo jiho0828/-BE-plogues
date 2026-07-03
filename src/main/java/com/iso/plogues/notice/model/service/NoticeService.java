@@ -4,7 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.iso.plogues.auth.model.vo.CustomUserDetails;
+import com.iso.plogues.exception.CustomAuthenticationException;
+import com.iso.plogues.exception.FailedDeleteException;
 import com.iso.plogues.exception.FailedFindByNoException;
+import com.iso.plogues.exception.FailedUpdateException;
+import com.iso.plogues.notice.file.model.service.NoticeFileService;
 import com.iso.plogues.notice.model.dao.NoticeMapper;
 import com.iso.plogues.notice.model.dto.NoticeDto;
 import com.iso.plogues.util.dto.BoardResponse;
@@ -18,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class NoticeService {
 
 	private final NoticeMapper noticeMapper;
+	private final NoticeFileService noticeFileService;
+	private static final String ADMIN_ID1 = "admin";
 	
 	@Transactional(readOnly = true)
 	public BoardResponse<NoticeDto> selectNoticeList(String category, int currentPage) {
@@ -39,5 +48,35 @@ public class NoticeService {
 	    List<FileDto> files = noticeMapper.selectFileList(noticeNo);
 	    notice.setFileList(files);
 	    return notice;
+	}
+
+	private static final String ADMIN_ID = "admin";
+
+	@Transactional
+	public void updateNotice(CustomUserDetails user, Long noticeNo, NoticeDto noticeDto, List<MultipartFile> files) {
+	    if (!ADMIN_ID1.equals(user.getUsername())) {
+	        throw new CustomAuthenticationException("관리자만 수정할 수 있습니다.");
+	    }
+	    noticeDto.setNoticeNo(noticeNo);
+	    int result = noticeMapper.updateNotice(noticeDto);
+	    if (result != 1) {
+	        throw new FailedUpdateException("공지사항 수정에 실패했습니다.");
+	    }
+	    if (files != null && !files.isEmpty()) {
+	        for (MultipartFile file : files) {
+	            noticeFileService.updateFile(file, noticeNo);
+	        }
+	    }
+	}
+
+	@Transactional
+	public void deleteNotice(CustomUserDetails user, Long noticeNo) {
+	    if (!ADMIN_ID1.equals(user.getUsername())) {
+	        throw new CustomAuthenticationException("관리자만 삭제할 수 있습니다.");
+	    }
+	    int result = noticeMapper.deleteNotice(noticeNo);
+	    if (result != 1) {
+	        throw new FailedDeleteException("공지사항 삭제에 실패했습니다.");
+	    }
 	}
 }
