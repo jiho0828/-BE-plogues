@@ -86,7 +86,7 @@ public class ProofService {
 
 	private PageInfo newPageInfo(int listCount, int page) {
 
-		return PageInfo.of(listCount, page, 9, 5);
+		return PageInfo.of(listCount, page, 8, 5);
 
 	}
 
