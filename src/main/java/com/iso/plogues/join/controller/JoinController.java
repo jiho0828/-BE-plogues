@@ -41,6 +41,13 @@ public class JoinController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created("게시글 작성 성공", null));
 	}
 	
+	@GetMapping("/my")
+	public ResponseEntity<ApiResponse<BoardResponse<JoinDto>>> findMyJoins(@AuthenticationPrincipal CustomUserDetails user, @RequestParam(defaultValue = "1") int page) {
+	    BoardResponse<JoinDto> br = joinService.findAllByHost(user, page);
+	    return ResponseEntity.status(200)
+	            .body(ApiResponse.success("내 모집 활동 조회 성공", br));
+	}
+	
 	@GetMapping
 	public ResponseEntity<ApiResponse<BoardResponse<JoinDto>>> findAll(@RequestParam(name="page", defaultValue = "1") int page, @RequestParam(name="category") String category, @RequestParam(name="keyword", required=false)String keyword) {
 		BoardResponse<JoinDto> br = null;
@@ -77,5 +84,6 @@ public class JoinController {
 		requestService.saveRequest(RequestDto.hostRequestDto(user.getUsername(), joinNo));
 		return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created("게시글 작성 성공", null));
 	}
+	
 
 }

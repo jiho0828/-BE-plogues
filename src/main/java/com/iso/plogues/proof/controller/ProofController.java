@@ -77,7 +77,7 @@ public class ProofController {
 	@PatchMapping("/{proofNo}")
 	public ResponseEntity<ApiResponse<Void>> UpdateProof(@AuthenticationPrincipal CustomUserDetails user, 
 														 @PathVariable (name="proofNo") Long proofNo, 
-														 @Valid ProofDto proof,
+														 @ModelAttribute @Valid ProofDto proof,
 														 @RequestParam (name="file", required=false) List<MultipartFile> files) {
 	    proofService.updateProof(user, proofNo, proof, files);
 		return ResponseEntity.status(200).body(ApiResponse.success("게시글 수정 성공", null));												 

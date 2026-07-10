@@ -26,20 +26,19 @@ public class ProofFileService {
 	@Transactional
 	public void saveProofFiles(List<MultipartFile> files, Long proofNo) {
 
-		String boardType = "proof";
+	    String boardType = "proof";
+	    for(int i = 0; i < files.size(); i++) {
+	        MultipartFile file = files.get(i);
+	        File fileEntity = File.of(proofNo, file.getOriginalFilename(), boardType);
 
-		for (MultipartFile file : files) {
+	        int result = proofFileMapper.saveFile(fileEntity, i + 1);
 
-			File fileEntity = File.of(proofNo, file.getOriginalFilename(), boardType);
+	        if(result != 1) {
+	            throw new FailedInsertException("파일 저장 실패");
+	        }
 
-			int result = proofFileMapper.saveFile(fileEntity);
-
-			if (result != 1) {
-				throw new FailedInsertException("파일 저장에 실패했습니다.");
-			}
-
-			fileService.fileTransferTo(file, fileEntity.getChangeName(), boardType);
-		}
+	        fileService.fileTransferTo(file, fileEntity.getChangeName(), boardType);
+	    }
 	}
 
 	@Transactional
@@ -51,22 +50,20 @@ public class ProofFileService {
 	public void deleteFile(Long proofNo) {
 
 		int result = proofFileMapper.deleteFile(proofNo);
-
 		if (result < 1) {
 			throw new FailedDeleteException("파일 삭제에 실패했습니다.");
 		}
 	}
 
+	
 	@Transactional
 	public void updateFile(List<MultipartFile> files, Long proofNo, String boardType) {
-		if (files == null || files.size() != 2) {
-			throw new FileUploadException("인증 사진은 2장을 등록해야 합니다.");
-		}
 
-		deleteFile(proofNo);
-
-		saveProofFiles(files, proofNo);
-
+	    if(files == null || files.isEmpty()) {
+	        return;
+	    }
+	    deleteFile(proofNo);
+	    saveProofFiles(files, proofNo);
 	}
 
 }

@@ -47,6 +47,13 @@ public class ProofService {
 		if (!join.getUserId().equals(user.getUsername())) {
 		    throw new CustomAuthenticationException("모집장만 인증글을 작성할 수 있습니다.");
 		}	
+		
+		// 해당 활동 인증글 중복 작성 방지
+		int count = proofMapper.countByJoinNo(proof.getJoinNo());
+		
+		if (count > 0) {
+		    throw new FileUploadException("이미 인증글을 작성한 활동입니다.");
+		}
 
 		Proof p = Proof.builder()
 					   .title(proof.getTitle())
