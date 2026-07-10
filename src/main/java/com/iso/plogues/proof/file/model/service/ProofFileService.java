@@ -50,21 +50,19 @@ public class ProofFileService {
 	public void deleteFile(Long proofNo) {
 
 		int result = proofFileMapper.deleteFile(proofNo);
-
 		if (result < 1) {
 			throw new FailedDeleteException("파일 삭제에 실패했습니다.");
 		}
 	}
 
+	
 	@Transactional
 	public void updateFile(List<MultipartFile> files, Long proofNo, String boardType) {
 
 	    if(files == null || files.isEmpty()) {
 	        return;
 	    }
-
 	    deleteFile(proofNo);
-
 	    saveProofFiles(files, proofNo);
 	}
 

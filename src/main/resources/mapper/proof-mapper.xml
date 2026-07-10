@@ -172,6 +172,17 @@
 		    BY
 		       EXTRACT(YEAR FROM CREATE_DATE)
 	</select>
+	
+	<select id="countByJoinNo" resultType="int">
+    	SELECT 
+    		   COUNT(*)
+    	 FROM 
+    	 	   PROOF_BOARD
+    	 WHERE 
+    	 	   JOIN_NO = #{joinNo}
+      	   AND 
+      	   	   DELETED = 'N'
+</select>
 
 
 </mapper>

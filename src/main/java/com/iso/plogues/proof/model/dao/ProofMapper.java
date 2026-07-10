@@ -26,4 +26,6 @@ public interface ProofMapper {
 	int updateProof(Proof proof);
 	
 	List<TreeCountDto>treeCountByYear();
+
+	int countByJoinNo(Long joinNo);
 }
