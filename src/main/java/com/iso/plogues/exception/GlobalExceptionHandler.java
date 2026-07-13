@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.iso.plogues.api.model.vo.ApiResponse;
 import com.iso.plogues.exception.report.DuplicateReportException;
 import com.iso.plogues.exception.request.InValidJoinRequestException;
+import com.iso.plogues.exception.token.NotFoundTokenException;
 import com.iso.plogues.exception.user.InvalidUserPwdException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -79,6 +80,11 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(DuplicateReportException.class)
 	public ResponseEntity<ApiResponse> handlerDuplicateReport(DuplicateReportException e){
+		return ResponseEntity.badRequest().body(ApiResponse.conplict(e.getMessage(), null));
+	}
+	
+	@ExceptionHandler(NotFoundTokenException.class)
+	public ResponseEntity<ApiResponse> handlerNotFoundToken(NotFoundTokenException e){
 		return ResponseEntity.badRequest().body(ApiResponse.conplict(e.getMessage(), null));
 	}
 
