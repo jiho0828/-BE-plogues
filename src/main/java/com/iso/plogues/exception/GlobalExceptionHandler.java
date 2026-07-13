@@ -14,6 +14,7 @@ import com.iso.plogues.exception.report.DuplicateReportException;
 import com.iso.plogues.exception.request.InValidJoinRequestException;
 import com.iso.plogues.exception.token.NotFoundTokenException;
 import com.iso.plogues.exception.user.InvalidUserPwdException;
+import com.iso.plogues.exception.user.NotPermissionException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,7 +86,12 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(NotFoundTokenException.class)
 	public ResponseEntity<ApiResponse> handlerNotFoundToken(NotFoundTokenException e){
-		return ResponseEntity.badRequest().body(ApiResponse.conplict(e.getMessage(), null));
+		return ResponseEntity.badRequest().body(ApiResponse.badRequest(e.getMessage(), null));
+	}
+	
+	@ExceptionHandler(NotPermissionException.class)
+	public ResponseEntity<ApiResponse> handlerNotPermission(NotPermissionException e){
+		return ResponseEntity.badRequest().body(ApiResponse.badRequest(e.getMessage(), null));
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
