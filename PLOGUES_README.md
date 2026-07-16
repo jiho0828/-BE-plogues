@@ -102,19 +102,23 @@ PLOGUES는 단순한 게시판 모음이 아니라 다음 활동이 순차적으
 
 ---
 
-## 5. 기술 스택
+## 🛠 기술 스택
 
 | 영역 | 기술 | 적용 내용 |
 | :--- | :--- | :--- |
-| **Backend** | Java 21, Spring Boot 3.5.16, Spring Web, Validation | REST API, 비즈니스 로직, 입력값 검증 |
-| **Security** | Spring Security, JWT 0.12.3 | Access · Refresh Token, 인증 · 인가, 역할 검증 |
-| **Persistence** | MyBatis 3.0.5, JDBC | SQL Mapper 기반 데이터 접근, 동적 SQL, 페이징 |
-| **Database** | Oracle XE | 회원, 게시판, 참여, 문의, 신고, 파일 등 관계형 데이터 저장 |
-| **Frontend** | React 19, Vite 8, JavaScript | SPA와 기능별 컴포넌트 구성 |
-| **Routing · HTTP** | react-router-dom, Axios | 클라이언트 라우팅, REST API 통신, 토큰 재발급 후 재요청 |
-| **UI** | styled-components, SweetAlert2, react-icons | 스타일 모듈화, 공통 알림, 아이콘 |
-| **Visualization** | Recharts | 온도 · 습도 · 토양 수분 데이터 시각화 |
-| **Collaboration** | Git, GitHub, Postman, DBeaver | 형상 관리, API 검증, DB 관리 |
+| **Backend** | Java **21**, Spring Boot **3.5.16**, Spring Web, Spring Validation | REST API 개발, 계층형 아키텍처(Controller-Service-Mapper), 비즈니스 로직 및 입력값 검증 |
+| **Security** | Spring Security **6.x**, JWT **0.12.3** | Access·Refresh Token 기반 인증, 인가, 역할(Role) 검증, 인증 필터 처리 |
+| **Persistence** | MyBatis **3.0.5**, JDBC | SQL Mapper 기반 데이터 접근, 동적 SQL, 페이징, 트랜잭션 처리 |
+| **Database** | Oracle Database Express Edition (XE) | 관계형 데이터 저장, JOIN, 시퀀스, 제약조건, 게시판·회원·참여·문의·신고 데이터 관리 |
+| **Frontend** | React **19.x**, Vite **7.x**, JavaScript (ES6+) | SPA 개발, 컴포넌트 기반 UI, 사용자 인터페이스 구현 |
+| **State Management** | React Context API, React Hooks | 로그인 정보 및 전역 상태 관리, 컴포넌트 상태 관리 |
+| **Routing · HTTP** | React Router DOM **7.x**, Axios **1.x** | SPA 라우팅, REST API 통신, JWT 재발급 후 자동 재요청(Interceptor) |
+| **UI / UX** | styled-components **6.x**, SweetAlert2 **11.x**, react-icons **5.x** | CSS-in-JS 스타일링, 공통 알림 모달, 아이콘 컴포넌트 |
+| **File Handling** | Multipart/Form-Data | 이미지 업로드, 첨부파일 저장 및 메타데이터 관리 |
+| **Visualization** | Recharts **3.x** | 온도·습도·토양 수분 센서 데이터 시각화 |
+| **Build Tool** | Maven **3.x** | 프로젝트 빌드 및 의존성 관리 |
+| **Development Tools** | IntelliJ IDEA, VS Code, SQL Developer | 백엔드·프론트엔드 개발 및 데이터베이스 관리 |
+| **Collaboration** | Git, GitHub, Postman, DBeaver | 형상 관리, Pull Request 기반 협업, REST API 테스트, DB 관리 |
 
 ---
 
