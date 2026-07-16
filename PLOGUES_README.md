@@ -17,14 +17,14 @@
 ![Java](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.16-6DB33F?style=flat-square&logo=springboot&logoColor=white)
 ![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)
-![MyBatis](https://img.shields.io/badge/MyBatis-3.0.5-000000?style=flat-square)
+![MyBatis](https://img.shields.io/badge/MyBatis%20Spring%20Boot-3.0.5-000000?style=flat-square)
 ![Oracle](https://img.shields.io/badge/Oracle-XE-F80000?style=flat-square&logo=oracle&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=222222)
+![React](https://img.shields.io/badge/React-19.2.7-61DAFB?style=flat-square&logo=react&logoColor=222222)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)
-![styled-components](https://img.shields.io/badge/styled--components-6-DB7093?style=flat-square&logo=styledcomponents&logoColor=white)
+![styled-components](https://img.shields.io/badge/styled--components-6.4.3-DB7093?style=flat-square&logo=styledcomponents&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-1.7-5A29E4?style=flat-square&logo=axios&logoColor=white)
-![Recharts](https://img.shields.io/badge/Recharts-2-8884D8?style=flat-square)
-![SweetAlert2](https://img.shields.io/badge/SweetAlert2-11-FF6B6B?style=flat-square)
+![Recharts](https://img.shields.io/badge/Recharts-3.9.2-8884D8?style=flat-square)
+![SweetAlert2](https://img.shields.io/badge/SweetAlert2-11.26.25-FF6B6B?style=flat-square)
 
 <br>
 
@@ -124,19 +124,22 @@ PLOGUES는 단순한 게시판 모음이 아니라 다음 활동이 순차적으
 
 ## 🛠 기술 스택
 
-<table>
-  <thead>
-    <tr><th>영역</th><th>기술 스택</th><th>적용 내용</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Backend</td><td>Java 21, Spring Boot 3.5.16</td><td>REST API, 비즈니스 로직, 검증</td></tr>
-    <tr><td>Security</td><td>Spring Security, JWT 0.12.3</td><td>인증 · 인가, 역할 검증</td></tr>
-    <tr><td>Persistence</td><td>MyBatis 3.0.5, JDBC</td><td>SQL Mapper, 동적 SQL, 페이징</td></tr>
-    <tr><td>Database</td><td>Oracle XE</td><td>관계형 데이터 저장</td></tr>
-    <tr><td>Frontend</td><td>React 19, Vite 8, JS</td><td>SPA, 컴포넌트 구성</td></tr>
-    <tr><td>Routing/UI</td><td>Axios, Styled-components</td><td>API 통신, 스타일 모듈화</td></tr>
-  </tbody>
-</table>
+| 구분 | 기술 스택 | 활용 내용 |
+| :--- | :--- | :--- |
+| **Backend** | Java **21**, Spring Boot **3.5.16**, Spring Web, Spring Validation | REST API 개발, 계층형 아키텍처(Controller-Service-Mapper), 비즈니스 로직 처리 및 입력값 검증 |
+| **Security** | Spring Security, JWT **0.12.3** | Access Token·Refresh Token 기반 인증 및 인가, 역할(Role) 검증, JWT 인증 필터 처리 |
+| **Persistence** | MyBatis Spring Boot Starter **3.0.5**, JDBC | SQL Mapper 기반 데이터 접근, 동적 SQL, 페이징 및 트랜잭션 처리 |
+| **Database** | Oracle Database **21c XE** | 관계형 데이터 저장, JOIN, 시퀀스, 제약조건 및 게시판·회원·참여·문의·신고 데이터 관리 |
+| **Frontend** | React **19.2.7**, Vite **8**, JavaScript (ES6+) | SPA 개발, 컴포넌트 기반 UI 구성 및 사용자 인터페이스 구현 |
+| **State Management** | React Context API, React Hooks | 로그인 사용자 정보와 전역 상태 관리, 컴포넌트별 상태 관리 |
+| **Routing · HTTP** | React Router DOM **7.18.0**, Axios **1.18.1** | SPA 라우팅, REST API 통신, JWT 재발급 및 실패 요청 자동 재요청 처리 |
+| **UI / UX** | styled-components **6.4.3**, SweetAlert2 **11.26.25**, react-icons **5.7.0** | CSS-in-JS 스타일링, 공통 알림·확인 모달 및 아이콘 컴포넌트 구현 |
+| **File Handling** | Multipart/Form-Data | 이미지 업로드, 첨부파일 저장, 수정·삭제 및 파일 메타데이터 관리 |
+| **Visualization** | Recharts **3.9.2** | 온도·습도·토양 수분 센서 데이터 시각화 |
+| **Build Tool** | Gradle **8.14.5** | 백엔드 프로젝트 빌드 및 의존성 관리 |
+| **Development Tools** | Spring Tool Suite **5.2.0**, VS Code, DBeaver | 백엔드·프론트엔드 개발 및 Oracle 데이터베이스 관리 |
+| **Collaboration** | Git, GitHub, Postman | 브랜치 기반 형상 관리, Pull Request 협업 및 REST API 테스트 |
+
 ---
 
 ## 6. 개발 기간 및 팀 구성
