@@ -130,7 +130,7 @@ PLOGUES는 단순한 게시판 모음이 아니라 다음 활동이 순차적으
 | **Security** | Spring Security, JWT **0.12.3** | Access Token·Refresh Token 기반 인증 및 인가, 역할(Role) 검증, JWT 인증 필터 처리 |
 | **Persistence** | MyBatis Spring Boot Starter **3.0.5**, JDBC | SQL Mapper 기반 데이터 접근, 동적 SQL, 페이징 및 트랜잭션 처리 |
 | **Database** | Oracle Database **21c XE** | 관계형 데이터 저장, JOIN, 시퀀스, 제약조건 및 게시판·회원·참여·문의·신고 데이터 관리 |
-| **Frontend** | React **19.2.7**, Vite **8**, JavaScript (ES6+) | SPA 개발, 컴포넌트 기반 UI 구성 및 사용자 인터페이스 구현 |
+| **Frontend** | React **19.2.7**, Vite **8**, JavaScript | SPA 개발, 컴포넌트 기반 UI 구성 및 사용자 인터페이스 구현 |
 | **State Management** | React Context API, React Hooks | 로그인 사용자 정보와 전역 상태 관리, 컴포넌트별 상태 관리 |
 | **Routing · HTTP** | React Router DOM **7.18.0**, Axios **1.18.1** | SPA 라우팅, REST API 통신, JWT 재발급 및 실패 요청 자동 재요청 처리 |
 | **UI / UX** | styled-components **6.4.3**, SweetAlert2 **11.26.25**, react-icons **5.7.0** | CSS-in-JS 스타일링, 공통 알림·확인 모달 및 아이콘 컴포넌트 구현 |
